@@ -33,7 +33,7 @@ This library is intended for use in a node.js environment (not a browser). It ha
 The sample scripts like DeviceProvisioning and DeviceMove use it like this:
 
 ```
-const helper = require('@particle-iot/node-example-helper');
+const helper = require('@particle/node-example-helper');
 helper
     .withRootDir(__dirname)
     .withConfig(config);

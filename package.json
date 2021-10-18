@@ -1,5 +1,5 @@
 {
-  "name": "@particle-iot/node-example-helper",
+  "name": "@particle/node-example-helper",
   "version": "0.0.1",
   "description": "Library for implementing simple node.js-based interactive command line tools that use the Particle API",
   "repository": {
