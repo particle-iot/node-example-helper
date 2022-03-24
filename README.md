@@ -45,6 +45,11 @@ Using the config file is optional. config is just an object that is read using r
 
 ## Version History
 
+### 0.0.2 (2022-03-24)
+
+- Allow auth token to to be loaded from an PARTICLE_AUTH environment variable
+- Support running without a config object
+
 ### 0.0.1 (2021-10-18)
 
 - Initial version

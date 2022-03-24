@@ -1,6 +1,6 @@
 {
   "name": "@particle/node-example-helper",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Library for implementing simple node.js-based interactive command line tools that use the Particle API",
   "repository": {
     "type": "git",
@@ -10,7 +10,7 @@
   "contributors": [],
   "license": "Apache-2.0",
   "dependencies": {
-    "axios": "^0.22.0"
+    "axios": "^0.26.1"
   },
   "engines": {
     "node": ">=12.14.0"

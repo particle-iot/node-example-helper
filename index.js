@@ -368,12 +368,35 @@ const readline = require('readline');
         return resp.data;
     };
 
+    helper.getAuthTokenLifeSecs = function() {
+        if (helper.config && typeof helper.config.authTokenLifeSecs != 'undefined') {
+            return helper.config.authTokenLifeSecs;
+        }
+        else {
+            return 3600;
+        }
+    }
+    
     helper.authenticate = async function() {
         helper.loadSettings();
         helper.devices = [];
         helper.auth = null;
+
+        if (!helper.auth && process.env.PARTICLE_AUTH) {
+            try {
+                helper.auth = process.env.PARTICLE_AUTH;
+                helper.userInfo = await helper.getUserInfo();
+
+                console.log('Using PARTICLE_AUTH environment variable');
+            }
+            catch(e) {
+                console.log('PARTICLE_AUTH is set in the environment but does not appear to be valid');
+                helper.auth = null;
+                process.exit(1);
+            }
+        }
         
-        if (!helper.auth && helper.config.auth) {
+        if (!helper.auth && helper.config && helper.config.auth) {
             try {
                 helper.auth = helper.config.auth;
                 helper.userInfo = await helper.getUserInfo();
@@ -413,7 +436,7 @@ const readline = require('readline');
             const postBodyObj = {
                 'client_id': 'particle',
                 'client_secret': 'particle',
-                'expires_in': helper.config.authTokenLifeSecs,
+                'expires_in': helper.getAuthTokenLifeSecs(),
                 'grant_type': 'password',
                 'password': password,
                 'username': username
@@ -464,7 +487,7 @@ const readline = require('readline');
                 process.exit(1);
             }
 
-            if (helper.config.saveInteractiveToken) {
+            if (helper.config && helper.config.saveInteractiveToken) {
                 helper.settings.auth = helper.auth;
                 helper.saveSettings(); 
             }
